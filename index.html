@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moogesh Chinniyan – Luxury Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;
+  --dark:#0f0f0f;
+  --card:#141414;
+  --gold:#c9a84c;
+  --gold-light:#e2c97e;
+  --cream:#f0e6d3;
+  --muted:#888;
+  --border:rgba(201,168,76,0.2);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--gold);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);letter-spacing:2px;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:200;padding:4px;}
+.nav-toggle span{display:block;width:24px;height:1px;background:var(--gold);transition:all 0.3s;}
+.nav-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-toggle.active span:nth-child(2){opacity:0;}
+.nav-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* MOBILE MENU */
+@media(max-width:768px){
+  .nav-toggle{display:flex;}
+  .nav-links{
+    display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(8,8,8,0.98);flex-direction:column;
+    align-items:center;justify-content:center;gap:2.5rem;
+    z-index:150;
+  }
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:1rem;letter-spacing:3px;}
+}
+
+/* HERO */
+#hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 6% 4rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold));margin:0 auto 1.5rem;}
+.hero-tag{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,10vw,6.5rem);font-weight:700;line-height:1.05;margin-bottom:1rem;background:linear-gradient(135deg,var(--cream) 0%,var(--gold-light) 50%,var(--cream) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-title{font-size:clamp(0.65rem,2vw,0.85rem);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;padding:0 1rem;}
+.hero-desc{max-width:560px;margin:0 auto 2.5rem;font-size:clamp(0.85rem,2.5vw,0.95rem);line-height:1.9;color:rgba(240,230,211,0.7);}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.hero-cta{display:inline-block;padding:0.85rem 2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;transition:all 0.4s;}
+.hero-cta:hover{background:var(--gold);color:var(--black);}
+.hero-cta.solid{background:var(--gold);color:var(--black);}
+.hero-cta.solid:hover{background:transparent;color:var(--gold);}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--muted);font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;}
+.scroll-line{width:1px;height:35px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 1.8s ease-in-out infinite;}
+@keyframes scrollAnim{0%{opacity:0;transform:scaleY(0);transform-origin:top;}50%{opacity:1;transform:scaleY(1);}100%{opacity:0;transform:scaleY(0);transform-origin:bottom;}}
+
+/* SECTIONS */
+section{padding:5rem 6%;}
+@media(min-width:1024px){section{padding:7rem 8%;}}
+.section-label{font-size:0.68rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:600;margin-bottom:1rem;line-height:1.2;}
+.section-divider{width:50px;height:1px;background:var(--gold);margin-bottom:3rem;}
+.section-divider.center{margin:0 auto 3rem;}
+
+/* ABOUT */
+#about{background:var(--dark);}
+.about-grid{display:grid;grid-template-columns:1fr;gap:3rem;}
+@media(min-width:900px){.about-grid{grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}}
+.about-text p{font-size:clamp(0.85rem,2vw,0.95rem);line-height:2;color:rgba(240,230,211,0.75);margin-bottom:1.2rem;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+.stat{border:1px solid var(--border);padding:1.2rem;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2rem);color:var(--gold);}
+.stat-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;}
+.about-right{display:flex;flex-direction:column;gap:0;}
+.info-item{display:flex;gap:1.2rem;align-items:flex-start;padding:1.2rem 0;border-bottom:1px solid var(--border);}
+.info-item:first-child{padding-top:0;}
+.info-item:last-child{border-bottom:none;}
+.info-icon{color:var(--gold);font-size:0.9rem;margin-top:3px;flex-shrink:0;}
+.info-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;}
+.info-val{font-size:clamp(0.82rem,2vw,0.9rem);color:var(--cream);line-height:1.5;}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.2rem;}
+.edu-card{background:var(--card);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:border-color 0.3s;}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s;}
+.edu-card:hover{border-color:var(--gold);}
+.edu-card:hover::before{opacity:1;}
+.edu-year{font-size:0.65rem;letter-spacing:3px;color:var(--gold);margin-bottom:0.8rem;}
+.edu-degree{font-family:'Playfair Display',serif;font-size:clamp(0.95rem,2vw,1.1rem);margin-bottom:0.5rem;line-height:1.4;}
+.edu-school{font-size:0.78rem;color:var(--muted);letter-spacing:0.5px;}
+
+/* EXPERIENCE */
+#experience{background:var(--dark);}
+.exp-list{display:flex;flex-direction:column;}
+.exp-item{display:grid;grid-template-columns:1fr;gap:1rem;padding:2.5rem 0;border-bottom:1px solid var(--border);}
+.exp-item:first-child{padding-top:0;}
+@media(min-width:700px){.exp-item{grid-template-columns:180px 1fr;gap:2.5rem;}}
+@media(min-width:1024px){.exp-item{grid-template-columns:200px 1fr;gap:3rem;}}
+.exp-period{font-size:0.7rem;letter-spacing:2px;color:var(--gold);margin-bottom:0.3rem;}
+.exp-company{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+.exp-role{font-family:'Playfair Display',serif;font-size:clamp(1.05rem,2.5vw,1.3rem);margin-bottom:1rem;}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.exp-points li{font-size:clamp(0.82rem,2vw,0.88rem);line-height:1.7;color:rgba(240,230,211,0.7);padding-left:1.2rem;position:relative;}
+.exp-points li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+@media(min-width:600px){.projects-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1100px){.projects-grid{grid-template-columns:repeat(4,1fr);}}
+.project-card{background:var(--card);border:1px solid var(--border);overflow:hidden;transition:transform 0.3s,border-color 0.3s;}
+.project-card:hover{transform:translateY(-4px);border-color:var(--gold);}
+.project-banner{height:140px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;letter-spacing:3px;text-align:center;padding:0 1rem;}
+.banner-lust{background:linear-gradient(135deg,#1a0a00,#2d1a00);color:var(--gold);}
+.banner-heritage{background:linear-gradient(135deg,#0a0a14,#14102a);color:#a09cc8;}
+.banner-luxury{background:linear-gradient(135deg,#0a1a0a,#0f2a14);color:#7ab87a;}
+.banner-trend{background:linear-gradient(135deg,#1a1000,#2a1f00);color:#d4a845;}
+.project-body{padding:1.5rem;}
+.project-tag{font-size:0.63rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;}
+.project-title{font-family:'Playfair Display',serif;font-size:clamp(0.95rem,2vw,1.1rem);margin-bottom:0.6rem;line-height:1.4;}
+.project-desc{font-size:clamp(0.78rem,1.8vw,0.83rem);line-height:1.8;color:rgba(240,230,211,0.65);}
+
+/* SKILLS */
+#skills{background:var(--dark);}
+.skills-grid{display:grid;grid-template-columns:1fr;gap:2rem;}
+@media(min-width:600px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.skills-grid{grid-template-columns:repeat(3,1fr);}}
+.skill-group-title{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.skill-tag{font-size:0.7rem;letter-spacing:0.5px;padding:0.4rem 0.85rem;border:1px solid var(--border);color:var(--muted);transition:all 0.3s;cursor:default;}
+.skill-tag:hover{border-color:var(--gold);color:var(--gold);}
+
+/* CERTIFICATES */
+.cert-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+@media(min-width:500px){.cert-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:900px){.cert-grid{grid-template-columns:repeat(4,1fr);}}
+.cert-card{border:1px solid var(--border);padding:1.8rem;display:flex;flex-direction:column;gap:0.8rem;transition:border-color 0.3s;}
+.cert-card:hover{border-color:var(--gold);}
+.cert-issuer{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.cert-name{font-family:'Playfair Display',serif;font-size:clamp(0.9rem,2vw,1rem);line-height:1.4;}
+.cert-date{font-size:0.73rem;color:var(--muted);}
+
+/* CONTACT */
+#contact{background:var(--dark);text-align:center;}
+.contact-inner{max-width:600px;margin:0 auto;}
+.contact-intro{font-size:clamp(0.85rem,2vw,0.95rem);line-height:1.9;color:rgba(240,230,211,0.7);margin-bottom:2.5rem;}
+.contact-links{display:flex;flex-direction:column;gap:0.9rem;margin-bottom:2.5rem;}
+.contact-link{display:flex;align-items:center;justify-content:center;gap:0.8rem;padding:1.1rem 1.5rem;border:1px solid var(--border);color:var(--cream);text-decoration:none;font-size:clamp(0.78rem,2vw,0.82rem);letter-spacing:0.5px;transition:all 0.3s;word-break:break-all;}
+.contact-link:hover{border-color:var(--gold);color:var(--gold);}
+.contact-link span{color:var(--gold);flex-shrink:0;}
+.contact-link.cv-btn{border-color:var(--gold);color:var(--gold);}
+.contact-link.cv-btn:hover{background:var(--gold);color:var(--black);}
+.footer-note{font-size:0.72rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:3rem;}
+.footer-line{padding-top:2rem;border-top:1px solid var(--border);font-size:0.7rem;letter-spacing:2px;color:var(--muted);}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in.delay-1{transition-delay:0.1s;}
+.fade-in.delay-2{transition-delay:0.2s;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MC</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeNav()">About</a></li>
+    <li><a href="#education" onclick="closeNav()">Education</a></li>
+    <li><a href="#experience" onclick="closeNav()">Experience</a></li>
+    <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+    <li><a href="#skills" onclick="closeNav()">Skills</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div>
+    <div class="hero-line"></div>
+    <p class="hero-tag">Luxury Management · Paris</p>
+    <h1 class="hero-name">Moogesh<br/>Chinniyan</h1>
+    <p class="hero-title">MBA Luxury Management · Brand Strategist · Experiential Designer</p>
+    <p class="hero-desc">Luxury-focused professional with international exposure, crafting culturally immersive, high-value brand experiences. Bridging Indian heritage with Parisian sophistication.</p>
+    <div class="hero-buttons">
+      <a href="#about" class="hero-cta">Discover My Story</a>
+      <a href="https://drive.google.com/file/d/1wSogAyCauYpjEd2hANP05grAS_akTjA7/view?usp=sharing" target="_blank" class="hero-cta solid">Download CV</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Where Luxury Meets Cultural Identity</h2>
+      <div class="section-divider"></div>
+      <p>I am a luxury-focused professional currently pursuing an MBA in Luxury Management at ISTEC Business School, Paris. My journey spans continents — from Chennai to Paris — blending engineering precision with creative brand thinking.</p>
+      <p>Passionate about global travel trends, premium consumer behavior, and experiential design, I specialize in crafting differentiated premium offerings that resonate across cultures. My unique positioning bridges Eastern heritage with Western luxury sensibility.</p>
+      <p>Whether conceptualizing luxury brand narratives, conducting market research, or designing immersive retail experiences — I bring both strategic rigor and aesthetic vision to every project.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Brand Projects</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Countries</div></div>
+        <div class="stat"><div class="stat-num">MBA</div><div class="stat-label">Luxury Management</div></div>
+      </div>
+    </div>
+    <div class="about-right fade-in delay-1">
+      <div class="info-item">
+        <div class="info-icon">◈</div>
+        <div><div class="info-label">Location</div><div class="info-val">Épinay-sur-Seine, Paris, France</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">◈</div>
+        <div><div class="info-label">Email</div><div class="info-val">moogeshchinniyan@gmail.com</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">◈</div>
+        <div><div class="info-label">Phone</div><div class="info-val">+33 7 58 75 84 97</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">◈</div>
+        <div><div class="info-label">Open To</div><div class="info-val">Travel & Global Opportunities</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">◈</div>
+        <div><div class="info-label">Languages</div><div class="info-val">English (Fluent) · French (Beginner) · Tamil (Native)</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">◈</div>
+        <div><div class="info-label">Personality</div><div class="info-val">DISC: I-D · Enneagram: Type 3 – The Achiever</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="fade-in" style="text-align:center;">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="section-divider center"></div>
+  </div>
+  <div class="edu-grid fade-in">
+    <div class="edu-card">
+      <div class="edu-year">2024 – 2026</div>
+      <div class="edu-degree">MBA in Luxury Management</div>
+      <div class="edu-school">ISTEC Business School · Paris, France</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2024 – 2025</div>
+      <div class="edu-degree">Luxury Brand Management Certificate</div>
+      <div class="edu-school">Institut Français de la Mode · Paris</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Completed</div>
+      <div class="edu-degree">Bachelor of Engineering</div>
+      <div class="edu-school">Mechanical Engineering · India</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Jan 2023</div>
+      <div class="edu-degree">Cyber Forensics</div>
+      <div class="edu-school">Great Learning Academy · Certified</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Jan 2023</div>
+      <div class="edu-degree">Java Programming</div>
+      <div class="edu-school">Great Learning Academy · Certified</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="fade-in">
+    <p class="section-label">Career Journey</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="exp-list fade-in">
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Mar – Sep 2025</div>
+        <div class="exp-company">Assistance Active<br/>Aubervilliers, France</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Business Development, Sales & Marketing Intern</div>
+        <ul class="exp-points">
+          <li>Managed office services including communication and consulting for SMEs</li>
+          <li>Created marketing proposals and assisted in client onboarding processes</li>
+          <li>Participated in brand audits and proposed affordable branding solutions</li>
+          <li>Supported ideation and GTM planning aligned with premium customer expectations</li>
+          <li>Built structured frameworks to evaluate feasibility, cost efficiency, and partner performance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2022 – 2023</div>
+        <div class="exp-company">Zudio (TATA Group)<br/>Chennai, India</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Visual Merchandiser – Premium Retail</div>
+        <ul class="exp-points">
+          <li>Executed brand-aligned visual strategies to enhance experiential retail environments</li>
+          <li>Designed store layouts and product displays to maximize sales impact</li>
+          <li>Analyzed consumer behavior patterns and customer traffic to optimize engagement</li>
+          <li>Contributed to immersive in-store experiences aligned with brand storytelling</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2021 – 2022</div>
+        <div class="exp-company">Burger King · India</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-role">Crew Member – Customer Operations</div>
+        <ul class="exp-points">
+          <li>Delivered high-volume customer service in a fast-paced environment</li>
+          <li>Maintained operational efficiency and product quality standards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fade-in" style="text-align:center;">
+    <p class="section-label">Selected Work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-divider center"></div>
+  </div>
+  <div class="projects-grid fade-in">
+    <div class="project-card">
+      <div class="project-banner banner-lust">LUST</div>
+      <div class="project-body">
+        <div class="project-tag">Luxury Fragrance Brand</div>
+        <div class="project-title">LUST – Dare to Be Desired</div>
+        <div class="project-desc">Founded in Paris, LUST is a gender-neutral luxury fragrance brand blending timeless artistry with modern allure. Features three collections — Ignite, Breeze, and Ember — priced $220–$270 per bottle.</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner banner-heritage">HERITAGE NOIR</div>
+      <div class="project-body">
+        <div class="project-tag">Brand Concept</div>
+        <div class="project-title">Heritage Noir</div>
+        <div class="project-desc">End-to-end premium brand concept including positioning, storytelling, experiential design, and global inspiration references with a go-to-market approach for aspirational luxury consumers.</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner banner-luxury">LUXURY<br/>FOR LOCALS</div>
+      <div class="project-body">
+        <div class="project-tag">Business Plan · Digital Studio</div>
+        <div class="project-title">Luxury for Locals</div>
+        <div class="project-desc">A digital-first consulting studio helping artisans and micro-businesses build premium brand presence through affordable design kits, storytelling services, and digital store setup.</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-banner banner-trend">TREND<br/>STUDY</div>
+      <div class="project-body">
+        <div class="project-tag">Market Research</div>
+        <div class="project-title">Global Consumer Trend Study</div>
+        <div class="project-desc">Researched emerging lifestyle, culture, gastronomy, and experiential trends across Europe. Identified consumer patterns influencing luxury travel and retail spaces.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="fade-in" style="text-align:center;">
+    <p class="section-label">Expertise</p>
+    <h2 class="section-title">Core Skills</h2>
+    <div class="section-divider center"></div>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="skill-group-title">Luxury & Brand</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Luxury Experience Curation</span>
+        <span class="skill-tag">Brand Positioning</span>
+        <span class="skill-tag">Brand Storytelling</span>
+        <span class="skill-tag">Heritage Brand Strategy</span>
+        <span class="skill-tag">Luxury Consumer Behaviour</span>
+        <span class="skill-tag">Visual Merchandising</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Business & Strategy</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Market Research</span>
+        <span class="skill-tag">Business Development</span>
+        <span class="skill-tag">Go-to-Market Strategy</span>
+        <span class="skill-tag">Competitive Analysis</span>
+        <span class="skill-tag">Strategic Planning</span>
+        <span class="skill-tag">Partner Management</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Marketing & Digital</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Campaign Management</span>
+        <span class="skill-tag">Content Marketing</span>
+        <span class="skill-tag">Social Media Marketing</span>
+        <span class="skill-tag">SEO / SEM</span>
+        <span class="skill-tag">Digital Marketing</span>
+        <span class="skill-tag">Influencer Marketing</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools & Technology</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Microsoft Office</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">HubSpot</span>
+        <span class="skill-tag">Google Analytics</span>
+        <span class="skill-tag">Notion</span>
+        <span class="skill-tag">Salesforce</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Cross-Cultural Communication</span>
+        <span class="skill-tag">Storytelling</span>
+        <span class="skill-tag">Strategic Thinking</span>
+        <span class="skill-tag">Client Relations</span>
+        <span class="skill-tag">Leadership</span>
+        <span class="skill-tag">Creativity</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Travel & Global</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Travel Trend Research</span>
+        <span class="skill-tag">Global Market Intelligence</span>
+        <span class="skill-tag">Bespoke Itinerary Design</span>
+        <span class="skill-tag">Cultural Adaptability</span>
+        <span class="skill-tag">Indo-French Perspective</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="fade-in" style="text-align:center;">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-divider center"></div>
+  </div>
+  <div class="cert-grid fade-in">
+    <div class="cert-card">
+      <div class="cert-issuer">ISTEC Business School</div>
+      <div class="cert-name">MBA in Luxury Management</div>
+      <div class="cert-date">2024 – 2026 · Paris, France</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Institut Français de la Mode</div>
+      <div class="cert-name">Luxury Brand Management</div>
+      <div class="cert-date">2024 – 2025 · Paris, France</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Great Learning Academy</div>
+      <div class="cert-name">Cyber Forensics</div>
+      <div class="cert-date">January 2023</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Great Learning Academy</div>
+      <div class="cert-name">Java Programming</div>
+      <div class="cert-date">January 2023</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Let's Create Something Extraordinary</h2>
+    <div class="section-divider center"></div>
+    <p class="contact-intro">Open to luxury brand consulting, marketing collaborations, and global opportunities. Whether you're building a premium brand or seeking a culturally nuanced creative partner — let's connect.</p>
+    <div class="contact-links">
+      <a href="mailto:moogeshchinniyan@gmail.com" class="contact-link">
+        <span>✦</span> moogeshchinniyan@gmail.com
+      </a>
+      <a href="tel:+33758758497" class="contact-link">
+        <span>✦</span> +33 7 58 75 84 97
+      </a>
+      <a href="https://www.linkedin.com/in/moogesh-mugi/" target="_blank" class="contact-link">
+        <span>✦</span> LinkedIn Profile
+      </a>
+      <a href="https://drive.google.com/file/d/1wSogAyCauYpjEd2hANP05grAS_akTjA7/view?usp=sharing" target="_blank" class="contact-link cv-btn">
+        <span>✦</span> Download CV
+      </a>
+    </div>
+    <p class="footer-note">Paris, France · Open to Global Opportunities</p>
+    <div class="footer-line">© 2025 Moogesh Chinniyan · All Rights Reserved</div>
+  </div>
+</section>
+
+<script>
+function toggleNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navToggle').classList.toggle('active');
+}
+function closeNav(){
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navToggle').classList.remove('active');
+}
+
+// FADE IN
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// NAV ACTIVE
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-220)cur=s.id;});
+  navAs.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--gold)':'';});
+});
+
+// CLOSE NAV ON OUTSIDE CLICK
+document.addEventListener('click',(e)=>{
+  const nav = document.querySelector('nav');
+  if(!nav.contains(e.target)){
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navToggle').classList.remove('active');
+  }
+});
+</script>
+</body>
+</html>
